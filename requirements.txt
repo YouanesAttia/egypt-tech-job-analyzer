@@ -1,0 +1,7 @@
+flask
+pandas
+gunicorn
+beautifulsoup4
+requests
+matplotlib
+seaborn
