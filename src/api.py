@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from src.analyzer import most_demanded_skills, top_hiring_companies, skill_correlation_matrix
+from analyzer import most_demanded_skills, top_hiring_companies, skill_correlation_matrix
 
 app = Flask(__name__)
 
