@@ -38,6 +38,22 @@ The project is structured as a modular ETL pipeline:
 
 ---
 
+## 📊 Visual Insights
+
+### Market Dominance: Top 10 Tech Skills
+
+![Top Skills](output/top_20_skills.png)
+
+### Geographical Distribution of Jobs
+
+![Geographical Distribution](output/geographical_distribution.png)
+
+### Average Experience Requirements by Role
+
+![Experience by Role](output/average_exp_by_role.png)
+
+---
+
 ## 📈 Market Insights (Key Findings)
 
 - **Geographical Concentration:** Analysis shows that **92.2% of IT vacancies** are concentrated within the Greater Cairo Area (Cairo & Giza).
