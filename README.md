@@ -56,7 +56,7 @@ The project is structured as a modular ETL pipeline:
 
 ## 📈 Market Insights (Key Findings)
 
-- **Geographical Concentration:** Analysis shows that **92.2% of IT vacancies** are concentrated within the Greater Cairo Area (Cairo & Giza).
+- **Geographical Concentration:** Analysis shows that **80% of vacancies** are concentrated within the Greater Cairo Area (Cairo & Giza).
 - **Skill Demand Distribution:** **"Engineering"** is the most frequent requirement (**~800 occurrences**), indicating a market prioritized toward architectural and systems roles over entry-level coding.
 - **Professional Requirements:** **Communication Skills** rank among the top three requirements, appearing in over **75% of senior-level postings**.
 
