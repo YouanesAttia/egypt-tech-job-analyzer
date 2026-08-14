@@ -44,9 +44,9 @@ The project is structured as a modular ETL pipeline:
 
 ![Top Skills](output/top_20_skills.png)
 
-### Geographical Distribution of Jobs
+### Top Hiring Companies
 
-![Geographical Distribution](output/geographical_distribution.png)
+![Top Companies](output/top_20_companies.png)
 
 ### Average Experience Requirements by Role
 
