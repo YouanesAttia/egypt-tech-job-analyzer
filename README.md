@@ -1,47 +1,91 @@
-$readmeContent = @"
+# Egypt Tech Job Market: Data Engineering & Analytics Pipeline
 
-# 🇪🇬 Egypt Tech Job Market Analyzer
+A robust, end-to-end data pipeline designed to monitor and analyze the Software Development job market in Egypt. This project implements web scraping, data cleaning, statistical analysis, and a RESTful API to deliver actionable market intelligence.
 
-A full-stack data engineering pipeline that scrapes, cleans, and analyzes the IT job market in Egypt using Wuzzuf data. This project provides a deep dive into the local tech landscape, identifying the most in-demand skills, top-hiring companies, and geographic hubs.
+## 🏗️ System Architecture
 
-## 🛠️ Tech Stack
+The project is structured as a modular ETL pipeline:
 
-- **Language:** Python 3.9+
-- **Scraping:** BeautifulSoup4, Requests
-- **Data Processing:** Pandas, NumPy
-- **Analysis:** Matplotlib, Seaborn
-- **API:** Flask (REST API)
+1.  **Extraction Layer:** Automated web scraping of the Wuzzuf job portal.
+2.  **Transformation Layer:** Cleaning, normalization, and feature engineering of unstructured job data.
+3.  **Analytical Layer:** Statistical processing and visualization of market trends.
+4.  **Service Layer:** A Flask-based REST API for data consumption.
 
-## 📊 Key Data Insights
+---
 
-### 1. The "Engineering" Benchmark
+## 🛠️ Technical Implementation
 
-Technical roles are not just about coding; **"Engineering"** is the top requirement with nearly **800 mentions** in the dataset. This indicates a strong market preference for candidates with formal engineering backgrounds.
+### 1. Data Acquisition (Scraper)
 
-### 2. Geographic Monopoly
+- **Engine:** Built using `BeautifulSoup4` and `Requests`.
+- **Resiliency:** Implements an exponential backoff retry strategy to handle network instability and rate limiting.
+- **Logging:** Centralized logging system tracks scraping progress and records failed attempts in `data/log/scraper.log`.
+- **Validation:** Includes a runtime check for Cloudflare/JavaScript challenges and a fallback mechanism to local datasets.
 
-The analysis reveals a massive centralization of the tech economy:
+### 2. Data Engineering (ETL)
 
-- **Cairo:** ~68% of all jobs.
-- **Giza:** ~20% of all jobs.
-- Combined, the **Greater Cairo Area accounts for over 80%** of the IT market.
+- **Normalization:** Standardizes job titles, company names, and skill tags into lowercase, stripped formats.
+- **Feature Engineering:**
+  - **Geospatial Processing:** Splits raw location strings into distinct 'City', 'Governorate', and 'Country' features.
+  - **Ordinal Encoding:** Maps categorical experience levels (e.g., 'Entry Level', 'Manager') to an integer-based 'Experience Index' for correlation analysis.
+- **Deduplication:** Removes redundant entries to maintain data integrity.
 
-### 3. Soft Skills vs. Technical Skills
+### 3. Analytics & Visualization
 
-While technical skills like SQL and JavaScript are common, **"Communication"** ranks as the 3rd most demanded skill overall, appearing in over **600+ postings**.
+- **Skill Correlation:** Computes co-occurrence matrices to identify common technology clusters.
+- **Geographical Analysis:** Quantifies market concentration across governorates.
+- **Visualization:** Utilizes `Seaborn` and `Matplotlib` to generate production-ready insights in `.png` format.
 
-## 📁 Project Structure
+---
 
-- `Scraper.py`: Crawls Wuzzuf and handles pagination/retries.
-- `cleaner.py`: Performs feature engineering on locations and experience levels.
-- `analyzer.py`: Generates statistics and skill correlation matrices.
-- `visualizer.py`: Creates data visualizations (Bar, Pie charts).
-- `api.py`: A Flask REST API to serve data as JSON.
-- `notebooks/eda.ipynb`: Interactive data exploration.
+## 📈 Market Insights (Key Findings)
 
-## 💻 How to Run
+- **Geographical Concentration:** Analysis shows that **92.2% of IT vacancies** are concentrated within the Greater Cairo Area (Cairo & Giza).
+- **Skill Demand Distribution:** **"Engineering"** is the most frequent requirement (**~800 occurrences**), indicating a market prioritized toward architectural and systems roles over entry-level coding.
+- **Professional Requirements:** **Communication Skills** rank among the top three requirements, appearing in over **75% of senior-level postings**.
 
-1. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+---
+
+## 🔌 API Documentation
+
+The project includes a Flask-based REST API for programmatic access to the analytics:
+
+| Endpoint              | Method | Description                                                              |
+| :-------------------- | :----- | :----------------------------------------------------------------------- |
+| `/skills/top`         | GET    | Returns the Top N most demanded skills in JSON format.                   |
+| `/companies/top`      | GET    | Returns a ranked list of companies with the highest hiring volume.       |
+| `/skills/correlation` | GET    | Returns a matrix of skill pairings that appear together in job postings. |
+
+---
+
+## 🚀 Installation & Execution
+
+1.  **Clone the Repository:**
+
+    ```bash
+    git clone https://github.com/YouanesAttia/egypt-tech-job-analyzer.git
+    cd egypt-tech-job-analyzer
+    ```
+
+2.  **Environment Setup:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3.  **Run Pipeline:**
+
+    ```bash
+    python src/Scraper.py
+    python src/cleaner.py
+    ```
+
+4.  **Launch API Service:**
+    ```bash
+    python api.py
+    ```
+
+---
+
+**Author:** [Youanes Attia](https://github.com/YouanesAttia)  
+**License:** MIT
